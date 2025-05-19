@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Αρχική Σελίδα";
+}
+
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="display-4 fw-bold text-primary">Καλώς ήρθατε στο RestauMania!</h1>
+        <p class="lead mt-3">
+            Βρείτε τα καλύτερα εστιατόρια, δείτε αξιολογήσεις, και μοιραστείτε τη δική σας εμπειρία.
+        </p>
+
+        <a asp-controller="Restaurants" asp-action="Index" class="btn btn-primary btn-lg mt-4">
+            🍽️ Αναζήτηση Εστιατορίων
+        </a>
+        
+    </div>
+    <div class="row text-center mt-5">
+        <div class="col-md-4 mb-4">
+            <img src="~/images/pizza.jpg" class="img-fluid rounded-circle shadow-sm floating" style="width: 150px;" alt="Pizza" />
+            <p class="mt-2">Pizza</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <img src="~/images/souvlaki.jpg" class="img-fluid rounded-circle shadow-sm floating" style="width: 150px;" alt="Souvlaki" />
+            <p class="mt-2">Σουβλάκι</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <img src="~/images/burger.jpg" class="img-fluid rounded-circle shadow-sm floating" style="width: 150px;" alt="Burger" />
+            <p class="mt-2">Burger</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <img src="~/images/chinese.jpg" class="img-fluid rounded-circle shadow-sm floating" style="width: 150px;" alt="Chinese" />
+            <p class="mt-2">Chinese</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <img src="~/images/pasta.jpg" class="img-fluid rounded-circle shadow-sm floating" style="width: 150px;" alt="Pasta" />
+            <p class="mt-2">Pasta</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <img src="~/images/sushi.jpg" class="img-fluid rounded-circle shadow-sm floating" style="width: 150px;" alt="Sushi" />
+            <p class="mt-2">Sushi</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <img src="~/images/grill.jpg" class="img-fluid rounded-circle shadow-sm floating" style="width: 150px;" alt="Grill" />
+            <p class="mt-2">Grill</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <img src="~/images/bakery.jpg" class="img-fluid rounded-circle shadow-sm floating" style="width: 150px;" alt="Bakery" />
+            <p class="mt-2">Bakery</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <img src="~/images/ethnic.jpg" class="img-fluid rounded-circle shadow-sm floating" style="width: 150px;" alt="Ethnic" />
+            <p class="mt-2">Ethnic</p>
+        </div>
+        <hr class="my-4" />
+
+        <div class="alert alert-warning text-center">
+            <strong>Έχετε εστιατόριο;</strong><br />
+            Εάν θέλετε να προσθέσετε το εστιατόριό σας, καλέστε μας στο <strong>6942823382</strong>.
+        </div>
+    </div>
+</div>

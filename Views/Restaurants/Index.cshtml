@@ -1,0 +1,106 @@
+﻿@model IEnumerable<RestaurantReviewApp.Models.Restaurant>
+
+@{
+    ViewData["Title"] = "Διαθέσιμα Εστιατόρια";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create" class="btn btn-success">➕ Νέο Εστιατόριο</a>
+    </p>
+}
+
+<form method="get" class="row mb-4 g-2">
+    <div class="col-md-3">
+        <input type="text" name="searchName" class="form-control" placeholder="Αναζήτηση ονόματος..." />
+    </div>
+    <div class="col-md-2">
+        <select name="cityFilter" class="form-control">
+            <option value="">Όλες οι πόλεις</option>
+            @foreach (var city in ViewBag.Cities as List<string>)
+            {
+                <option value="@city">@city</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-2">
+        <select name="categoryFilter" class="form-control">
+            <option value="">Όλες οι κατηγορίες</option>
+            @foreach (var cat in ViewBag.Categories as List<string>)
+            {
+                <option value="@cat">@cat</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-2">
+        <select name="sortOrder" class="form-control">
+            <option value="">Χωρίς ταξινόμηση</option>
+            <option value="rating_desc">Βαθμολογία ↓</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary">🔍 Αναζήτηση</button>
+    </div>
+</form>
+
+@if (!Model.Any())
+{
+    <p class="text-muted">Δεν βρέθηκαν αποτελέσματα.</p>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@item.Location</h6>
+                        <p class="card-text">
+                            @item.Description
+                        </p>
+                        <div class="mb-2">
+                            <span class="badge bg-secondary">@item.Category</span>
+                            <span class="badge bg-info text-dark">@item.Location</span>
+                        </div>
+                        @if (item.Reviews.Any())
+                        {
+                            <p class="mb-1">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    if (i <= Math.Floor(item.DisplayRating))
+                                    {
+                                        <span class="text-warning">★</span>
+                                    }
+                                    else if (i - item.DisplayRating <= 0.5)
+                                    {
+                                        <span class="text-warning">☆</span> 
+                                    }
+                                    else
+                                    {
+                                        <span class="text-secondary">☆</span>
+                                    }
+                                }
+                                <small class="ms-1 text-muted">(@item.DisplayRating.ToString("0.0"))</small>
+                            </p>
+                        }
+                        else
+                        {
+                            <p class="text-muted fst-italic">Χωρίς αξιολογήσεις</p>
+                        }
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Προβολή</a>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-secondary btn-sm">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">Delete</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

@@ -1,0 +1,50 @@
+﻿@model RestaurantReviewApp.Models.Review
+
+@{
+    ViewData["Title"] = "Υποβολή Αξιολόγησης";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title mb-4 text-center text-primary">Αξιολόγηση Εστιατορίου</h4>
+
+                    <form asp-action="Create">
+                        <input type="hidden" asp-for="RestaurantId" />
+                        <div asp-validation-summary="All" class="alert alert-danger"></div>
+
+                        <div class="form-floating mb-3">
+                            <select asp-for="Rating" class="form-control">
+                                <option value="">-- Επιλογή βαθμολογίας --</option>
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                            <label asp-for="Rating">Βαθμολογία (1–5)</label>
+                            <span asp-validation-for="Rating" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <textarea asp-for="Comment" class="form-control" style="height: 100px;"></textarea>
+                            <label asp-for="Comment">Σχόλιο</label>
+                            <span asp-validation-for="Comment" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">Υποβολή</button>
+                    </form>
+
+                    <div class="mt-3 text-center">
+                        <a asp-controller="Restaurants" asp-action="Details" asp-route-id="@Model.RestaurantId">⬅ Επιστροφή</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

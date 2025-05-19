@@ -1,0 +1,72 @@
+﻿@model IEnumerable<RestaurantReviewApp.Models.Review>
+
+@{
+    ViewData["Title"] = "Admin Panel";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">📊 Admin Panel</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-info text-center">
+            @TempData["Message"]
+        </div>
+    }
+
+    <div class="row text-center mb-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm p-3">
+                <h5 class="text-muted">Εστιατόρια</h5>
+                <h3>@ViewBag.RestaurantCount</h3>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm p-3">
+                <h5 class="text-muted">Αξιολογήσεις</h5>
+                <h3>@ViewBag.ReviewCount</h3>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm p-3">
+                <h5 class="text-muted">Χρήστες</h5>
+                <h3>@ViewBag.UserCount</h3>
+            </div>
+        </div>
+    </div>
+
+   
+
+    <h4 class="mt-4">📝 Όλες οι αξιολογήσεις</h4>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Χρήστης</th>
+                <th>Εστιατόριο</th>
+                <th>Βαθμολογία</th>
+                <th>Σχόλιο</th>
+                <th>Ημερομηνία</th>
+                <th>Ενέργεια</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model)
+            {
+                <tr>
+                    <td>@r.UserName</td>
+                    <td>@r.Restaurant?.Name</td>
+                    <td>@r.Rating</td>
+                    <td>@r.Comment</td>
+                    <td>@r.DatePosted.ToShortDateString()</td>
+                    <td>
+                        <form asp-action="DeleteReview" asp-route-id="@r.Id" method="post" class="d-inline" onsubmit="return confirm('Θέλετε σίγουρα να διαγράψετε αυτή την αξιολόγηση;');">
+                            <button type="submit" class="btn btn-sm btn-danger">🗑️ Διαγραφή</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
